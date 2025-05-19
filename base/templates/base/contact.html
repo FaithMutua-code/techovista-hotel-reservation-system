@@ -1,0 +1,48 @@
+{% extends 'base/index.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+<div class="head">
+    <h1>Contact Us</h1>
+    <p>Reservations? Questions? Suggestions? Special request? Get in touch through the form below and we'll reply as soon as we can.
+    </p>
+</div>
+<div class="box">
+    {% if messages %}
+        {% for message in messages %}
+            <div style="background-color: rgb(80, 180, 247);
+                padding: 10px;
+                border-radius: 10px;
+                margin: 10px;">
+            {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="first-name">First Name<span>(required)</span></label><br>
+        <input type="text" id="first-name" name="first_name" placeholder="Enter your first name" required><br>
+
+        <label for="last-name">Last Name<span>(required)</span></label><br>
+        <input type="text" id="last-name" name="last_name" placeholder="Enter your last name" required><br>
+
+        <label for="email">Email <span>(required)</span></label><br>
+        <input type="email" id="email" name="email" placeholder="Enter your email address" required><br>
+
+        <label for="subject">Subject<span>(required)</span></label><br>
+        <input type="text" id="subject" name="subject" placeholder="Enter the subject of your message"><br>
+
+        <label for="message">Message <span>(required)</span></label><br>
+        <textarea id="message" name="message" placeholder="Write your message here" required></textarea><br>
+
+        <label for="phone">Phone</label><br>
+        <input type="tel" name="phone" id="phone" placeholder="Enter your phone number"><br>
+
+        <label for="date">Date</label><br>
+        <input type="date" name="date" id="date"><br>
+
+        <input type="submit" value="Submit">
+        
+    </form>
+</div>
+{% endblock %}

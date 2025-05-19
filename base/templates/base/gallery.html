@@ -1,0 +1,35 @@
+{% extends 'base/index.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/gallery.css' %}">
+<div class="service-company">
+    <div class="service-info">
+        <div class="img-service">
+            <img src="{% static 'images/h1.jpeg' %}" alt="">
+            <p></p>
+        </div>
+        <div class="img-service">
+            <img src="{% static 'images/h2.jpg' %}" alt="">
+            <p></p>
+        </div>
+        <div class="img-service">
+            <img src="{% static 'images/h3.jpg' %}" alt="">
+            <p></p>
+        </div>
+    </div> 
+    <div class="service-info-2">
+        <div class="img-service">
+            <img src="{% static 'images/h4.jpg' %}" alt="">
+            <p></p>
+        </div>
+        <div class="img-service">
+            <img src="{% static 'images/h5.avif' %}" alt="">
+            <p></p>
+        </div>
+        <div class="img-service">
+            <img src="{% static 'images/h6.jpg' %}" alt="">
+            <p></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

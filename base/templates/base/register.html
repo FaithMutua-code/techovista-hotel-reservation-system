@@ -1,0 +1,45 @@
+{% extends 'base/index.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <div class="header">
+        <h1>
+            TechnoVista
+        </h1>
+    </div>
+
+    <!-- Account Creation Form -->
+    <div class="form-container">
+        <h2>Create Account</h2>
+        <form action="" method="POST">
+            {% if messages %}
+                {% for message in messages %}
+                    <div style="background-color: rgb(80, 180, 247);
+                        padding: 10px;
+                        border-radius: 10px;
+                        margin: 10px;">
+                    {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% csrf_token %}
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username">
+    
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email">
+    
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password1" placeholder="Create a password">
+    
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" name="password2" placeholder="Confirm your password">
+            <button type="submit">Create Account</button>
+
+            <!-- Links to Login -->
+            <div class="links">
+                <a href="{% url 'login_view' %}">Already have an account? Login</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Your Software Engineering Company offers custom web development, software solutions, and UI/UX design. Let's build something amazing together.">
+  <title>Technovista Online Reservation System</title>
+  <link rel="stylesheet" href="{% static 'css/style.css'%}"> 
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="{% url 'home' %}" class="logo">
+        <img src="{% static 'images/logo.png' %}" alt="Pelican Lodge Logo">
+      </a>
+      <nav>
+        <ul>
+          <li><a href="{% url 'amenities' %}">Amenities</a></li>
+          <li><a href="{% url 'rooms' %}">Rooms and Rates</a></li>
+          {% if reserve_id %}
+            <li><a href="{% url 'rates' reserve_id %}">Check Rates</a></li>
+          {% else %}
+            <li><a href="{% url 'rates_no_id' %}">Check Rates</a></li>
+          {% endif %}
+          <li><a href="{% url 'gallery' %}">Gallery</a></li>
+          <li><a href="{% url 'contact' %}">Contact</a></li>
+          <li><a href="{% url 'visit' %}">visit</a></li>
+          <li><a href="{% url 'rooms' %}"  class="book-btn">Book a Room</a></li>
+          {% if request.user.is_authenticated %}
+            <li><a href="{% url 'logout_view' %}" class="log">Logout</a></li>
+          {% else %}
+            <li><a href="{% url 'login_view' %}" class="log">Login</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+  </header>
+  {% block content %}
+  {% endblock %}
+  <footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p>Email: Technovista@gmail.com</p>
+            <p>Phone: +254 123 456 789</p>
+            <p>Address: Technovista ,Nyeri, Kenya</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="{% url 'amenities' %}">Amenities</a></li>
+                <li><a href="#">Rooms and Rates</a></li>
+                <li><a href="{% url 'gallery' %}">Gallery</a></li>
+                <li><a href="{% url 'visit' %}">visit</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                <li><a href="{% url 'rooms' %}">Book a Room</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="#" class="social-icon">Facebook</a>
+                <a href="#" class="social-icon">Twitter</a>
+                <a href="#" class="social-icon">Instagram</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2025 . Powered by Technovista Hotel Reservation System.</p>
+    </div>
+  </footer>
+</body>
+</html>

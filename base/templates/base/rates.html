@@ -1,0 +1,87 @@
+{% extends 'base/index.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/rates.css' %}">
+    <div class="main-pay">
+        
+        <div class="payments">
+            {% if messages %}
+                {% for message in messages %}
+                    <div style="background-color: rgb(80, 180, 247);
+                        padding: 10px;
+                        border-radius: 10px;
+                        margin: 10px;">
+                    {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <h2>Make payments</h2>
+            <form id="stkPushForm">
+                <div id="responseMessage" class="response"></div>
+                <div class="phone">
+                    <label for="phone" class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" id="phone" name="phone" required placeholder="e.g. 0712345678">
+                </div>
+                
+                <div class="amount">
+                    <label for="amount" class="form-label">Amount</label>
+                    <input type="number" class="form-control" id="amount" name="amount" required placeholder="e.g. 100">
+                </div>
+                
+                <button type="submit" class="pay-btn">Make Payment</button>
+            </form>
+            
+        </div>
+        <div class="rates-summary">
+            <p><i>summary</i></p>
+            <h3><i>Room Name</i>: <span>{{ reserves.room.room_name }}</span></h3>
+            <h3><i>clients Accomodated</i>: <span>{{ reserves.population }}</span></h3>
+            <h3><i>Total Payable</i>: <span>{{ total_price }}</span></h3>
+        </div>
+    </div>
+    
+
+    <script>
+        document.getElementById('stkPushForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get the form data
+            const phone = document.getElementById('phone').value;
+            const amount = document.getElementById('amount').value;
+
+            const requestData = {
+                phone: phone,
+                amount: amount
+            };
+
+            // Send POST request to the Flask API
+            fetch('http://127.0.0.1:8000/stkpush/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                let message = "<div class='alert alert-success'>Payment request sent successfully!</div>";
+                if (data.success === false) {
+                    message = alert(`${data.message}`);
+                }
+                document.getElementById('responseMessage').innerHTML = message;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('responseMessage').innerHTML = '<div class="alert alert-danger">An error occurred while processing your request. Please try again.</div>';
+            });
+        });
+
+
+
+
+
+
+    </script>
+
+
+{% endblock %}
