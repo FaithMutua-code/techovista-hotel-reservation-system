@@ -188,4 +188,17 @@ def contact(request):
 
 
 
- de01117 (added a password reset functionality)
+def de01117():
+    # This function handles password reset functionality
+    pass  # Add your logic here
+class CustomPasswordResetView(PasswordResetView):
+    template_name = 'base/password_reset.html'
+    email_template_name = 'base/password_reset_email.html'
+    subject_template_name = 'base/password_reset_subject.txt'
+    success_url = '/password-reset/done/'  # Redirect to this URL after sending the email
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, "Password reset email sent.")
+        return response
+
